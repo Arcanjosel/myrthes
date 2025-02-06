@@ -1,0 +1,100 @@
+#:kivy 2.2.1
+
+<MainScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        
+        MDTopAppBar:
+            title: "Sistema de Loja"
+            elevation: 10
+            left_action_items: [["menu", lambda x: app.root.toggle_nav_drawer()]]
+            
+        MDNavigationLayout:
+            MDScreenManager:
+                id: screen_manager
+                
+                MDScreen:
+                    name: "menu"
+                    
+                    MDTabs:
+                        id: tabs
+                        on_tab_switch: app.on_tab_switch(*args)
+                        
+                        Tab:
+                            title: "Clientes"
+                            MDBoxLayout:
+                                orientation: 'vertical'
+                                padding: "10dp"
+                                
+                                MDTextField:
+                                    id: search_clientes
+                                    hint_text: "Pesquisar clientes..."
+                                    mode: "rectangle"
+                                    
+                                ScrollView:
+                                    MDList:
+                                        id: lista_clientes
+                        
+                        Tab:
+                            title: "Produtos"
+                            MDBoxLayout:
+                                orientation: 'vertical'
+                                padding: "10dp"
+                                
+                                MDTextField:
+                                    id: search_produtos
+                                    hint_text: "Pesquisar produtos..."
+                                    mode: "rectangle"
+                                    
+                                ScrollView:
+                                    MDList:
+                                        id: lista_produtos
+                        
+                        Tab:
+                            title: "Pedidos"
+                            MDBoxLayout:
+                                orientation: 'vertical'
+                                padding: "10dp"
+                                
+                                MDTextField:
+                                    id: search_pedidos
+                                    hint_text: "Pesquisar pedidos..."
+                                    mode: "rectangle"
+                                    
+                                ScrollView:
+                                    MDList:
+                                        id: lista_pedidos
+
+            MDNavigationDrawer:
+                id: nav_drawer
+                
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: "8dp"
+                    spacing: "8dp"
+                    
+                    MDLabel:
+                        text: "Menu"
+                        font_style: "H6"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    
+                    ScrollView:
+                        MDList:
+                            OneLineIconListItem:
+                                text: "Novo Cliente"
+                                on_release: app.novo_cliente()
+                                IconLeftWidget:
+                                    icon: "account-plus"
+                            
+                            OneLineIconListItem:
+                                text: "Novo Produto"
+                                on_release: app.novo_produto()
+                                IconLeftWidget:
+                                    icon: "package-variant-plus"
+                            
+                            OneLineIconListItem:
+                                text: "Novo Pedido"
+                                on_release: app.novo_pedido()
+                                IconLeftWidget:
+                                    icon: "cart-plus"
